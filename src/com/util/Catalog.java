@@ -2,8 +2,6 @@ package com.util;
 
 public class Catalog {
 
-	// may not be needed if items are stored in the DB
-
 	public static final String PROCESSORS = "1. AMD Ryzen 3600X\n2. AMD Athlon X4\n" + "3. AMD Phenom II";
 
 	public static final String MOTHERBOARDS = "1. ASRock X370 Killer SLI/ac\n2. MSI B450 Gaming Plus MAX\n"
