@@ -1,6 +1,10 @@
 package com.util;
 
 public class Catalog {
+	
+	//may need to include prices and decrips
+	
+	//formatting should be handled with formatter
 
 	public static final String PROCESSORS = "1. AMD Ryzen 3600X\n2. AMD Athlon X4\n" + "3. AMD Phenom II";
 
@@ -13,7 +17,7 @@ public class Catalog {
 	public static final String CASES = "1. DIYPC Skyline-06-WB ATX Full\n"
 			+ "2. Corsair Obsidian Series 750D ATX\n3. Fractal Design Define 7 XL ATX";
 
-	public static final String POWER = "1. EVGA SuperNova 650 G5\n2. ThermalTake GF1 650W Gold"
+	public static final String POWER = "1. EVGA SuperNova 650W G5\n2. ThermalTake GF1 650W Gold"
 			+ "\n3. Rosewill LEPTON 600W Modular Gold";
 
 	public static final String MEMORY = "1. G.SKILL Ripjaws V Series 32GB DDR4"

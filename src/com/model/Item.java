@@ -2,16 +2,16 @@ package com.model;
 
 public class Item {
 
-	private String itemId;
+	private Integer itemId;
 	private String itemName;
 	private String itemDescrip;
 	private double itemPrice;
 
-	public String getItemId() {
+	public Integer getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(String itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 
@@ -39,7 +39,7 @@ public class Item {
 		this.itemPrice = itemPrice;
 	}
 
-	public Item(String itemId, String itemName, String itemDescrip, double itemPrice) {
+	public Item(Integer itemId, String itemName, String itemDescrip, double itemPrice) {
 		super();
 		this.itemId = itemId;
 		this.itemName = itemName;
