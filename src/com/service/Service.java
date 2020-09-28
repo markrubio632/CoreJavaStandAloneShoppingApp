@@ -10,10 +10,15 @@ import com.util.Catalog;
 import com.util.Menus;
 
 public class Service {
+	
+	//todo list:
+	//ADD TRANSACTIONS
+	//MODIFY ITEMS IN CATALOG - DESCRIPTION AND PRICE REFLECTED
 
-	Catalog catalog = new Catalog();
+	// Catalog catalog = new Catalog();
 	Menus menu = new Menus();
 	DaoImpl daoimpl = new DaoImpl();
+	User loggedUser = new User();
 
 	Scanner sc = new Scanner(System.in);
 
@@ -68,11 +73,29 @@ public class Service {
 
 	boolean isLogged = false;
 	int input = 0;
-	
+
 	String userName;
 	String password;
 	String contactNum;
 	String address;
+
+	public void StartPage() {
+		menu.StartUpMenu();
+		input = sc.nextInt();
+		sc.nextLine();
+		if (input == 1) {
+			RegistrationPage();
+		} else if (input == 2) {
+			loginPage();
+			MainMenu(loggedUser, isLogged);
+		} else if (input == 3) {
+			menu.ComponentMenu();
+		} else if (input == 4) {
+			// insert replacement method
+		} else if (input == 5) {
+			System.exit(0);
+		}
+	}
 
 	public void RegistrationPage() {
 
@@ -113,9 +136,7 @@ public class Service {
 
 	public User loginPage() {
 
-		User loggedUser = new User();
-
-		Scanner sc = new Scanner(System.in);
+		loggedUser = emptyLogin(loggedUser);
 
 		System.out.println("Please enter your user name: ");
 		String userName = sc.nextLine();
@@ -125,10 +146,10 @@ public class Service {
 
 		if (userExists(userName, password)) {
 
-			System.out.println("Logging in");
-
 			loggedUser = LoginTime(userName, password);
-			// redirect to different page?
+			isLogged = true;
+
+			System.out.println(loggedUser.getUserName() + " ...Logging in");
 
 		}
 
@@ -140,24 +161,176 @@ public class Service {
 
 	}
 
-	public void StartPage() {
-		menu.StartUpMenu();
-		input = sc.nextInt();
-		sc.nextLine();
-		if (input == 1) {
-			RegistrationPage();
-		} else if (input == 2) {
-			loginPage();
-		} else if (input == 3) {
-			menu.ComponentMenu();
-		} else if (input == 4) {
-			// insert replacement method
-		} else if (input == 5) {
-			System.exit(0);
+	public void MainMenu(User loggedUser, boolean isLogged) {
+
+		if (isLogged) {
+
+			menu.LoggedMenu();
+
+			input = sc.nextInt();
+
+			if (input == 1) {
+
+				menu.ComponentMenu();
+
+				input = sc.nextInt();
+
+				if (input == 1) {
+					System.out.println(Catalog.PROCESSORS);
+					input = sc.nextInt();
+
+					if (input == 1) {
+						cart.add(items.get(0));
+					} else if (input == 2) {
+						cart.add(items.get(1));
+					} else if (input == 3) {
+						cart.add(items.get(2));
+					} else {
+						System.out.println("invalid selection. Returning to Main Menu...");
+						MainMenu(loggedUser, isLogged);
+					}
+				} else if (input == 2) {
+					System.out.println(Catalog.MOTHERBOARDS);
+					input = sc.nextInt();
+					if (input == 1) {
+						cart.add(items.get(3));
+					} else if (input == 2) {
+						cart.add(items.get(4));
+					} else if (input == 3) {
+						cart.add(items.get(5));
+					} else {
+						System.out.println("invalid selection. Returning to Main Menu...");
+						MainMenu(loggedUser, isLogged);
+					}
+				} else if (input == 3) {
+					System.out.println(Catalog.GRAPHICS);
+					input = sc.nextInt();
+					if (input == 1) {
+						cart.add(items.get(6));
+					} else if (input == 2) {
+						cart.add(items.get(7));
+					} else if (input == 3) {
+						cart.add(items.get(8));
+					} else {
+						System.out.println("invalid selection. Returning to Main Menu...");
+						MainMenu(loggedUser, isLogged);
+					}
+				} else if (input == 4) {
+					System.out.println(Catalog.CASES);
+					input = sc.nextInt();
+					if (input == 1) {
+						cart.add(items.get(9));
+					} else if (input == 2) {
+						cart.add(items.get(10));
+					} else if (input == 3) {
+						cart.add(items.get(11));
+					} else {
+						System.out.println("invalid selection. Returning to Main Menu...");
+						MainMenu(loggedUser, isLogged);
+					}
+				} else if (input == 5) {
+					System.out.println(Catalog.POWER);
+					input = sc.nextInt();
+					if (input == 1) {
+						cart.add(items.get(12));
+					} else if (input == 2) {
+						cart.add(items.get(13));
+					} else if (input == 3) {
+						cart.add(items.get(14));
+					} else {
+						System.out.println("invalid selection. Returning to Main Menu...");
+						MainMenu(loggedUser, isLogged);
+					}
+				} else if (input == 6) {
+					System.out.println(Catalog.MEMORY);
+					input = sc.nextInt();
+					if (input == 1) {
+						cart.add(items.get(15));
+					} else if (input == 2) {
+						cart.add(items.get(16));
+					} else if (input == 3) {
+						cart.add(items.get(17));
+					} else {
+						System.out.println("invalid selection. Returning to Main Menu...");
+						MainMenu(loggedUser, isLogged);
+					}
+				} else if (input == 7) {
+					System.out.println(Catalog.STORAGE);
+					input = sc.nextInt();
+					if (input == 1) {
+						cart.add(items.get(18));
+					} else if (input == 2) {
+						cart.add(items.get(19));
+					} else if (input == 3) {
+						cart.add(items.get(20));
+					} else {
+						System.out.println("invalid selection. Returning to Main Menu...");
+						MainMenu(loggedUser, isLogged);
+					}
+				} else if (input == 8) {
+					System.out.println(loggedUser.getUserName() + ": logging out");
+
+					loggedUser = emptyLogin(loggedUser);
+
+					StartPage();
+				} else if (input == 9) {
+					System.exit(0);
+				}
+				MainMenu(loggedUser, isLogged);
+
+			} else if (input == 2) {
+				// view account
+
+				long total = 0;
+
+				System.out.println(loggedUser);
+
+				if (cart.isEmpty()) {
+					System.out.println("Your shopping cart is empty!");
+				} else {
+					for (Item item : cart) {
+
+						total += item.getItemPrice();
+
+						System.out.println("My shopping cart has: " + item.toString());
+					}
+					System.out.println("Your total balance is " + total);
+				}
+
+				MainMenu(loggedUser, isLogged);
+
+			} else if (input == 3) {
+				// purchase history
+
+			} else if (input == 4) {
+				// logout
+
+				System.out.println(loggedUser.getUserName() + ": logging out");
+
+				loggedUser = emptyLogin(loggedUser);
+
+				StartPage();
+
+			} else if (input == 5) {
+				// exit
+
+				// closes scanner
+				sc.close();
+
+				// closes application
+				System.exit(0);
+			}
+
+		} else {
+			System.out.println("User not logged in. Returning to Start Up...");
+			StartPage();
 		}
+
 	}
 
-	// determines if the user exists in the DB
+	// EXTRA METHODS USED
+
+	// determines if the user exists in the DB or local lists
 	public boolean userExists(String userName, String password) {
 
 		// to be used with sql
@@ -175,6 +348,7 @@ public class Service {
 		return false;
 	}
 
+	// used to login the user and set isLogged to true
 	public User LoginTime(String userName, String password) {
 
 		User logger = new User();
@@ -197,37 +371,19 @@ public class Service {
 
 	}
 
-	public void MainMenu(User loginUser, boolean isLogged) {
+	// empties user and sets isLogged to false
+	public User emptyLogin(User loggedUser) {
 
-		if (isLogged) {
+		loggedUser.setUserId(null);
+		loggedUser.setUserName(null);
+		loggedUser.setPassword(null);
+		loggedUser.setContactNum(null);
+		loggedUser.setAddress(null);
+		loggedUser.setAdmin(false);
 
-			menu.LoggedMenu();
-			input = sc.nextInt();
-			if (input == 1) {
+		isLogged = false;
 
-				menu.ComponentMenu();
-
-			} else if (input == 2) {
-				loginUser.toString();
-			} else if (input == 3) {
-				// purchase history
-			} else if (input == 4) {
-
-				// logout
-				loginUser.equals(null);
-				// redirect to start menu
-				StartPage();
-
-			} else if (input == 5) {
-				// exit
-				System.exit(0);
-			}
-
-		} else {
-			System.out.println("User not logged in. Returning to Start Up...");
-			StartPage();
-		}
-
+		return loggedUser;
 	}
 
 }
