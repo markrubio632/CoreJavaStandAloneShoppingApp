@@ -63,7 +63,7 @@ public class User {
 
 	public User(Integer userId, String userName, String password, String contactNum, String address, boolean isAdmin) {
 		super();
-		this.userId = userId;
+		this.userId = userId++;
 		this.userName = userName;
 		this.password = password;
 		this.contactNum = contactNum;
