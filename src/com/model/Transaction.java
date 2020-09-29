@@ -1,14 +1,16 @@
 package com.model;
 
+import java.util.Date;
+
 public class Transaction {
 
 	private Integer transId;
 	private String transDescrip;
-	private String transTime;
+	private Date transTime;
 	private Integer userId;
 	private Integer itemId;
 
-	public Transaction(Integer transId, String transDescrip, String transTime, Integer userId, Integer itemId) {
+	public Transaction(Integer transId, String transDescrip, Date transTime, Integer userId, Integer itemId) {
 		super();
 		this.transId = transId;
 		this.transDescrip = transDescrip;
@@ -33,11 +35,11 @@ public class Transaction {
 		this.transDescrip = transDescrip;
 	}
 
-	public String getTransTime() {
+	public Date getTransTime() {
 		return transTime;
 	}
 
-	public void setTransTime(String transTime) {
+	public void setTransTime(Date transTime) {
 		this.transTime = transTime;
 	}
 

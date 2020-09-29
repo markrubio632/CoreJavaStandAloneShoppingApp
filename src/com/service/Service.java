@@ -11,10 +11,11 @@ import com.util.Catalog;
 import com.util.Menus;
 
 public class Service {
-	
-	//todo list:
-	//ADD TRANSACTIONS
-	//MODIFY ITEMS IN CATALOG - DESCRIPTION AND PRICE REFLECTED
+
+	// todo list:
+	// improve transactions - adding to shopping cart should not create a transaction
+	//implement date checker for return items
+	// MODIFY ITEMS IN CATALOG - DESCRIPTION AND PRICE REFLECTED
 
 	// Catalog catalog = new Catalog();
 	Menus menu = new Menus();
@@ -29,12 +30,12 @@ public class Service {
 	static List<Item> cart = new ArrayList<Item>();
 
 	static List<Item> items = new ArrayList<Item>();
-	
+
 	static List<Transaction> transList = new ArrayList<Transaction>();
-	
+
 	boolean isLogged = false;
 	int input = 0;
-	static int userIdCounter = 0; //used to give a static counter - increments in the user addition
+	static int userIdCounter = 0; // used to give a static counter - increments in the user addition
 	static int itemCounter = 0;
 	static int transCounter = 0;
 
@@ -65,7 +66,8 @@ public class Service {
 
 		// cases
 		items.add(new Item(itemCounter++, "DIYPC Skyline-06-WB ATX Full", "Great case for beginners", 70.00));
-		items.add(new Item(itemCounter++, "Corsair Obsidian Series 750D ATX", "Solid choice, top choice of 2020", 100.00));
+		items.add(new Item(itemCounter++, "Corsair Obsidian Series 750D ATX", "Solid choice, top choice of 2020",
+				100.00));
 		items.add(new Item(itemCounter++, "Fractal Design Define 7 XL ATX", "Big gamers need big cases", 130.00));
 
 		// power supplies
@@ -74,18 +76,19 @@ public class Service {
 		items.add(new Item(itemCounter++, "Rosewill LEPTON 600W Modular Gold", "Customizability is crucial", 180.00));
 
 		// memory
-		items.add(new Item(itemCounter++, "G.SKILL Ripjaws V Series 32GB DDR4", "Lots of stuff at once? No problem", 123.00));
-		items.add(new Item(itemCounter++, "CORSAIR Vengeance RGB Pro 16GB DDR4", "Need more colors? We got you", 76.00));
+		items.add(new Item(itemCounter++, "G.SKILL Ripjaws V Series 32GB DDR4", "Lots of stuff at once? No problem",
+				123.00));
+		items.add(
+				new Item(itemCounter++, "CORSAIR Vengeance RGB Pro 16GB DDR4", "Need more colors? We got you", 76.00));
 		items.add(new Item(itemCounter++, "CORSAIR Vengeance LPX 16GB DDR4", "Industry Standard", 70.00));
 
 		// storage
-		items.add(new Item(itemCounter++, "Western Digital WD BLACK SN750 Internal SSD 1TB", "Industry Standard", 110.00));
+		items.add(new Item(itemCounter++, "Western Digital WD BLACK SN750 Internal SSD 1TB", "Industry Standard",
+				110.00));
 		items.add(new Item(itemCounter++, "Crucial P1 1TB 3D NAND Internal", "M2 slot", 130.00));
 		items.add(new Item(itemCounter++, "WD Blue 3D NAND 1TB Internal SSD", "Also Industry Standard", 110.00));
 
 	}
-
-	
 
 	public void StartPage() {
 		menu.StartUpMenu();
@@ -132,7 +135,9 @@ public class Service {
 
 				// used to save to local arraylist
 				System.out.println("user created");
-				users.add(new User(userIdCounter++, userName, password, contactNum, address, false)); //uses counter to increase all user IDs by 1
+				users.add(new User(userIdCounter++, userName, password, contactNum, address, false)); // uses counter to
+																										// increase all
+																										// user IDs by 1
 				System.out.println(users.toString());
 			}
 
@@ -189,15 +194,13 @@ public class Service {
 
 					if (input == 1) {
 						cart.add(items.get(0));
-						
-						cart.get(0);
-						
-						transList.add(new Transaction(transCounter++, cart.get(0).getItemDescrip(),new Date().toLocaleString(),loggedUser.getUserId(),cart.get(0).getItemId()));
+						AddTransaction(0);
 					} else if (input == 2) {
 						cart.add(items.get(1));
 						AddTransaction(1);
 					} else if (input == 3) {
 						cart.add(items.get(2));
+						AddTransaction(2);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -207,10 +210,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(3));
+						AddTransaction(3);
 					} else if (input == 2) {
 						cart.add(items.get(4));
+						AddTransaction(4);
 					} else if (input == 3) {
 						cart.add(items.get(5));
+						AddTransaction(5);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -220,10 +226,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(6));
+						AddTransaction(6);
 					} else if (input == 2) {
 						cart.add(items.get(7));
+						AddTransaction(7);
 					} else if (input == 3) {
 						cart.add(items.get(8));
+						AddTransaction(8);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -233,10 +242,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(9));
+						AddTransaction(9);
 					} else if (input == 2) {
 						cart.add(items.get(10));
+						AddTransaction(10);
 					} else if (input == 3) {
 						cart.add(items.get(11));
+						AddTransaction(11);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -246,10 +258,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(12));
+						AddTransaction(12);
 					} else if (input == 2) {
 						cart.add(items.get(13));
+						AddTransaction(13);
 					} else if (input == 3) {
 						cart.add(items.get(14));
+						AddTransaction(14);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -259,10 +274,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(15));
+						AddTransaction(15);
 					} else if (input == 2) {
 						cart.add(items.get(16));
+						AddTransaction(16);
 					} else if (input == 3) {
 						cart.add(items.get(17));
+						AddTransaction(17);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -272,10 +290,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(18));
+						AddTransaction(18);
 					} else if (input == 2) {
 						cart.add(items.get(19));
+						AddTransaction(19);
 					} else if (input == 3) {
 						cart.add(items.get(20));
+						AddTransaction(20);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -309,20 +330,27 @@ public class Service {
 					}
 					System.out.println("Your total balance is " + total);
 				}
+				
+				System.out.println("Your purchase history is: \n");
+				
+				for (Transaction trans : transList) {
+					System.out.println(trans.getTransDescrip() + " purchased at " + trans.getTransTime());
+				}
 
 				MainMenu(loggedUser, isLogged);
 
 			} else if (input == 3) {
-				// purchase history
+				// return an item
 				
-				System.out.println(transList);
+				System.out.println("Your current items are: ");
 				
 				for(Transaction trans : transList) {
-					System.out.println(trans.getTransDescrip() + " purchased at " + trans.getTransTime());
+					
+					//METHOD TO RETRIEVE A RECORD BASED ON ID
+					
 				}
-				
 
-			} else if (input == 4) {
+			}else if (input == 4) {
 				// logout
 
 				System.out.println(loggedUser.getUserName() + ": logging out");
@@ -403,10 +431,29 @@ public class Service {
 
 		return loggedUser;
 	}
-	
+
+	//used to add a transaction based on what the item ID is that is being added to the shopping cart
 	@SuppressWarnings("deprecation")
 	public void AddTransaction(int cartIdNumber) {
-		transList.add(new Transaction(transCounter++, cart.get(cartIdNumber).getItemDescrip(),new Date().toLocaleString(),loggedUser.getUserId(),cart.get(cartIdNumber).getItemId()));
+		transList.add(new Transaction(transCounter++, cart.get(cartIdNumber).getItemDescrip(),
+				new Date(), loggedUser.getUserId(), cart.get(cartIdNumber).getItemId()));
+
+	}
+	
+	public void ReturnItem() {
+		
+		Date currentDate = new Date();
+		
+		for(Transaction trans : transList) {
+			
+			if(trans.getTransTime().compareTo(currentDate) >=15) {
+				
+				transList.remove(trans);
+				
+			}
+			
+		}
+		
 	}
 
 }
