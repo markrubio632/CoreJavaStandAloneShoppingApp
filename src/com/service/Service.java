@@ -13,8 +13,9 @@ import com.util.Menus;
 public class Service {
 
 	// todo list:
-	// improve transactions - adding to shopping cart should not create a transaction
-	//implement date checker for return items
+	// improve transactions - adding to shopping cart should not create a
+	// transaction
+	// implement date checker for return items
 	// MODIFY ITEMS IN CATALOG - DESCRIPTION AND PRICE REFLECTED
 
 	// Catalog catalog = new Catalog();
@@ -102,9 +103,10 @@ public class Service {
 		} else if (input == 3) {
 			menu.ComponentMenu();
 		} else if (input == 4) {
-			// insert replacement method
-		} else if (input == 5) {
 			System.exit(0);
+		} else {
+			System.out.println("Please enter a valid command");
+			StartPage();
 		}
 	}
 
@@ -194,13 +196,10 @@ public class Service {
 
 					if (input == 1) {
 						cart.add(items.get(0));
-						AddTransaction(0);
 					} else if (input == 2) {
 						cart.add(items.get(1));
-						AddTransaction(1);
 					} else if (input == 3) {
 						cart.add(items.get(2));
-						AddTransaction(2);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -210,13 +209,10 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(3));
-						AddTransaction(3);
 					} else if (input == 2) {
 						cart.add(items.get(4));
-						AddTransaction(4);
 					} else if (input == 3) {
 						cart.add(items.get(5));
-						AddTransaction(5);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -226,13 +222,10 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(6));
-						AddTransaction(6);
 					} else if (input == 2) {
 						cart.add(items.get(7));
-						AddTransaction(7);
 					} else if (input == 3) {
 						cart.add(items.get(8));
-						AddTransaction(8);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -242,13 +235,10 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(9));
-						AddTransaction(9);
 					} else if (input == 2) {
 						cart.add(items.get(10));
-						AddTransaction(10);
 					} else if (input == 3) {
 						cart.add(items.get(11));
-						AddTransaction(11);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -258,13 +248,10 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(12));
-						AddTransaction(12);
 					} else if (input == 2) {
 						cart.add(items.get(13));
-						AddTransaction(13);
 					} else if (input == 3) {
 						cart.add(items.get(14));
-						AddTransaction(14);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -274,13 +261,10 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(15));
-						AddTransaction(15);
 					} else if (input == 2) {
 						cart.add(items.get(16));
-						AddTransaction(16);
 					} else if (input == 3) {
 						cart.add(items.get(17));
-						AddTransaction(17);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -290,13 +274,10 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(18));
-						AddTransaction(18);
 					} else if (input == 2) {
 						cart.add(items.get(19));
-						AddTransaction(19);
 					} else if (input == 3) {
 						cart.add(items.get(20));
-						AddTransaction(20);
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -315,9 +296,33 @@ public class Service {
 			} else if (input == 2) {
 				// view account
 
-				long total = 0;
-
 				System.out.println(loggedUser);
+
+				if (!transList.isEmpty()) {
+
+					System.out.println("Your purchase history is: ");
+
+					for (Transaction trans : transList) {
+
+						if (trans.getUserId().equals(loggedUser.getUserId())) {
+							System.out.println(ItemFinder(trans.getItemId()) + " Purchased at " + trans.getTransTime());
+						}
+
+					}
+				}
+
+				MainMenu(loggedUser, isLogged);
+
+			} else if (input == 3) {
+				// return an item
+
+				ReturnItem();
+				MainMenu(loggedUser, isLogged);
+
+			} else if (input == 4) {
+				// Checkout
+
+				long total = 0;
 
 				if (cart.isEmpty()) {
 					System.out.println("Your shopping cart is empty!");
@@ -330,27 +335,28 @@ public class Service {
 					}
 					System.out.println("Your total balance is " + total);
 				}
-				
-				System.out.println("Your purchase history is: \n");
-				
-				for (Transaction trans : transList) {
-					System.out.println(trans.getTransDescrip() + " purchased at " + trans.getTransTime());
+
+				System.out.println("Would you like to checkout?");
+
+				System.out.println("1. Yes\n2. No");
+
+				input = sc.nextInt();
+
+				if (input == 1) {
+
+					System.out.println("Thank you for Checking out!");
+
+					AddTransaction();
+
+					cart.clear();
+
+					MainMenu(loggedUser, isLogged);
+
+				} else if (input == 2) {
+					MainMenu(loggedUser, isLogged);
 				}
 
-				MainMenu(loggedUser, isLogged);
-
-			} else if (input == 3) {
-				// return an item
-				
-				System.out.println("Your current items are: ");
-				
-				for(Transaction trans : transList) {
-					
-					//METHOD TO RETRIEVE A RECORD BASED ON ID
-					
-				}
-
-			}else if (input == 4) {
+			} else if (input == 5) {
 				// logout
 
 				System.out.println(loggedUser.getUserName() + ": logging out");
@@ -359,7 +365,7 @@ public class Service {
 
 				StartPage();
 
-			} else if (input == 5) {
+			} else if (input == 6) {
 				// exit
 
 				sc.close();
@@ -432,28 +438,78 @@ public class Service {
 		return loggedUser;
 	}
 
-	//used to add a transaction based on what the item ID is that is being added to the shopping cart
-	@SuppressWarnings("deprecation")
-	public void AddTransaction(int cartIdNumber) {
-		transList.add(new Transaction(transCounter++, cart.get(cartIdNumber).getItemDescrip(),
-				new Date(), loggedUser.getUserId(), cart.get(cartIdNumber).getItemId()));
+	// used to add a transaction based on what the item ID is that is being added to
+	// the shopping cart
+	public void AddTransaction() {
+
+		for (Item item : cart) {
+
+			transList.add(new Transaction(transCounter++, item.getItemDescrip(), new Date(), loggedUser.getUserId(),
+					item.getItemId()));
+
+		}
 
 	}
-	
+
 	public void ReturnItem() {
-		
+
 		Date currentDate = new Date();
-		
-		for(Transaction trans : transList) {
-			
-			if(trans.getTransTime().compareTo(currentDate) >=15) {
-				
-				transList.remove(trans);
-				
+
+		int transCounter = 0;
+
+		if (transList.isEmpty()) {
+			System.out.println("There are no items to return!");
+		} else {
+
+			System.out.println("What item would you like to return?");
+
+			for (Transaction trans : transList) {
+
+				for (Item item : items) {
+
+					if (trans.getUserId().equals(loggedUser.getUserId())
+							&& item.getItemId().equals(trans.getItemId())) {
+
+						System.out.println(++transCounter + ". " + item.getItemName());
+
+					}
+
+				}
+
 			}
-			
+
+			input = sc.nextInt();
+
+			if (input == transCounter) {
+
+				for (Transaction trans : transList) {
+
+					if (trans.getTransTime().compareTo(currentDate) <= 15) {
+
+						transList.remove(trans);
+
+						System.out.println("Item complies with our return policy\nThanks for returning the Item!");
+
+					} else {
+						System.out.println("Item is past the return policy date");
+					}
+				}
+			}
 		}
-		
+
+	}
+
+	public Item ItemFinder(int id) {
+
+		for (Item i : items) {
+
+			if (i.getItemId().equals(id)) {
+				return i;
+			}
+
+		}
+		return null;
+
 	}
 
 }
