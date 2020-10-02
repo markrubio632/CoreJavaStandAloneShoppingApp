@@ -8,6 +8,7 @@ import java.util.Scanner;
 import com.dao.DaoImpl;
 import com.model.*;
 import com.util.Catalog;
+import com.util.InputValidation;
 import com.util.Menus;
 
 public class Service {
@@ -22,6 +23,7 @@ public class Service {
 	Menus menu = new Menus();
 	DaoImpl daoimpl = new DaoImpl();
 	User loggedUser = new User();
+	InputValidation valid = new InputValidation();
 
 	Scanner sc = new Scanner(System.in);
 
@@ -92,6 +94,9 @@ public class Service {
 	}
 
 	public void StartPage() {
+		//create databes upon start up
+		//daoimpl.createDatabases();
+		
 		menu.StartUpMenu();
 		input = sc.nextInt();
 		sc.nextLine();
@@ -111,10 +116,13 @@ public class Service {
 	}
 
 	public void RegistrationPage() {
+		
+		System.out.println(users.toString());
 
 		try {
 
-			System.out.println("Please enter a User Name: ");
+			System.out.println("Please enter a User Name - Must follow this format:\n"
+					+ "At least 1 Capital, 1 Lowercase, 1 number, and between 3-20 characters: ");
 
 			userName = sc.nextLine();
 
@@ -131,16 +139,19 @@ public class Service {
 			if (userExists(userName, password)) {
 				System.out.println("User Name Taken. Please Try again");
 				RegistrationPage();
-			} else {
+			} else if (valid.ValidContactNum(contactNum) && valid.ValidPassword(password)
+					&&valid.ValidUserName(userName)) {
 				// used to save directly to DB
 				// daoimpl.saveUser(0, userName, password, contactNum, address, false);
 
 				// used to save to local arraylist
 				System.out.println("user created");
-				users.add(new User(userIdCounter++, userName, password, contactNum, address, false)); // uses counter to
-																										// increase all
-																										// user IDs by 1
-				System.out.println(users.toString());
+				// uses local list
+				users.add(new User(userIdCounter++, userName, password, contactNum, address, false));
+			}
+			else {
+				System.out.println("Registration failed!\nCheck your input and try again");
+				StartPage();
 			}
 
 		} catch (Exception e) {
@@ -160,6 +171,17 @@ public class Service {
 		String password = sc.nextLine();
 
 		if (userExists(userName, password)) {
+
+			// used for DB
+			/*
+			 * for (User user : users) {
+			 * 
+			 * if (user.getUserName().equals(userName) &&
+			 * user.getPassword().equals(password)) { loggedUser =
+			 * LoginTime(user.getUserName(), user.getPassword()); }
+			 * 
+			 * }
+			 */
 
 			loggedUser = LoginTime(userName, password);
 			isLogged = true;
@@ -196,10 +218,13 @@ public class Service {
 
 					if (input == 1) {
 						cart.add(items.get(0));
+						System.out.println("Item added to cart");
 					} else if (input == 2) {
 						cart.add(items.get(1));
+						System.out.println("Item added to cart");
 					} else if (input == 3) {
 						cart.add(items.get(2));
+						System.out.println("Item added to cart");
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -209,10 +234,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(3));
+						System.out.println("Item added to cart");
 					} else if (input == 2) {
 						cart.add(items.get(4));
+						System.out.println("Item added to cart");
 					} else if (input == 3) {
 						cart.add(items.get(5));
+						System.out.println("Item added to cart");
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -222,10 +250,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(6));
+						System.out.println("Item added to cart");
 					} else if (input == 2) {
 						cart.add(items.get(7));
+						System.out.println("Item added to cart");
 					} else if (input == 3) {
 						cart.add(items.get(8));
+						System.out.println("Item added to cart");
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -235,10 +266,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(9));
+						System.out.println("Item added to cart");
 					} else if (input == 2) {
 						cart.add(items.get(10));
+						System.out.println("Item added to cart");
 					} else if (input == 3) {
 						cart.add(items.get(11));
+						System.out.println("Item added to cart");
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -248,10 +282,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(12));
+						System.out.println("Item added to cart");
 					} else if (input == 2) {
 						cart.add(items.get(13));
+						System.out.println("Item added to cart");
 					} else if (input == 3) {
 						cart.add(items.get(14));
+						System.out.println("Item added to cart");
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -261,10 +298,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(15));
+						System.out.println("Item added to cart");
 					} else if (input == 2) {
 						cart.add(items.get(16));
+						System.out.println("Item added to cart");
 					} else if (input == 3) {
 						cart.add(items.get(17));
+						System.out.println("Item added to cart");
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -274,10 +314,13 @@ public class Service {
 					input = sc.nextInt();
 					if (input == 1) {
 						cart.add(items.get(18));
+						System.out.println("Item added to cart");
 					} else if (input == 2) {
 						cart.add(items.get(19));
+						System.out.println("Item added to cart");
 					} else if (input == 3) {
 						cart.add(items.get(20));
+						System.out.println("Item added to cart");
 					} else {
 						System.out.println("invalid selection. Returning to Main Menu...");
 						MainMenu(loggedUser, isLogged);
@@ -309,12 +352,35 @@ public class Service {
 						}
 
 					}
+				} else {
+					System.out.println("Your purchase history is empty!");
 				}
 
 				MainMenu(loggedUser, isLogged);
 
 			} else if (input == 3) {
 				// return an item
+
+				int transCounter = 0;
+
+				if (transList.isEmpty()) {
+					System.out.println("There are no items to return!");
+				} else if (!transList.isEmpty()) {
+
+					for (Transaction trans : transList) {
+
+						for (Item item : items) {
+
+							if (trans.getUserId().equals(loggedUser.getUserId())
+									&& item.getItemId().equals(trans.getItemId())) {
+
+								System.out.println(
+										++transCounter + ". " + item.getItemName() + " ID# " + item.getItemId());
+
+							}
+						}
+					}
+				}
 
 				ReturnItem();
 				MainMenu(loggedUser, isLogged);
@@ -334,11 +400,11 @@ public class Service {
 						System.out.println("My shopping cart has: " + item.toString());
 					}
 					System.out.println("Your total balance is " + total);
+
+					System.out.println("Would you like to checkout?");
+
+					System.out.println("1. Yes\n2. No");
 				}
-
-				System.out.println("Would you like to checkout?");
-
-				System.out.println("1. Yes\n2. No");
 
 				input = sc.nextInt();
 
@@ -455,48 +521,22 @@ public class Service {
 
 		Date currentDate = new Date();
 
-		int transCounter = 0;
+		System.out.println("Please enter the Item ID of the item you would like to return");
+		input = sc.nextInt();
 
-		if (transList.isEmpty()) {
-			System.out.println("There are no items to return!");
-		} else {
+		for (Transaction trans : transList) {
 
-			System.out.println("What item would you like to return?");
+			if (trans.getTransTime().compareTo(currentDate) <= 15 && trans.getItemId().equals(input)) {
 
-			for (Transaction trans : transList) {
+				transList.remove(trans);
 
-				for (Item item : items) {
+				System.out.println("Item complies with our return policy\nThanks for returning the Item!");
+				break;
 
-					if (trans.getUserId().equals(loggedUser.getUserId())
-							&& item.getItemId().equals(trans.getItemId())) {
-
-						System.out.println(++transCounter + ". " + item.getItemName());
-
-					}
-
-				}
-
-			}
-
-			input = sc.nextInt();
-
-			if (input == transCounter) {
-
-				for (Transaction trans : transList) {
-
-					if (trans.getTransTime().compareTo(currentDate) <= 15) {
-
-						transList.remove(trans);
-
-						System.out.println("Item complies with our return policy\nThanks for returning the Item!");
-
-					} else {
-						System.out.println("Item is past the return policy date");
-					}
-				}
+			} else {
+				System.out.println("Item is past the return policy date");
 			}
 		}
-
 	}
 
 	public Item ItemFinder(int id) {

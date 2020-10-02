@@ -15,9 +15,9 @@ public class DaoImpl {
 	ResultSet rs;
 	PreparedStatement stmt;
 
-	private static final String CREATE_USER_TABLE = "create table shop_user(userId integer auto_increment primary key, userName varchar(20), password varchar (30), isAdmin bool)";
-	private static final String CREATE_ITEM_TABLE = "create table shop_item(itemId integer auto_increment primary key, itemDescrip varchar(200), itemPrice double)";
-	private static final String CREATE_TRANSACTION_TABLE = "create table shop_transaction(transId Integer auto_increment primary key, transDescrip varchar(100), transTime varchar(30))";
+	private static final String CREATE_USER_TABLE = "create table shop_user(userId integer auto_increment primary key, userName varchar(20), password varchar (20), contactNum varchar(20), address varchar(30), isAdmin bool)";
+	private static final String CREATE_ITEM_TABLE = "create table shop_item(itemId integer auto_increment primary key, itemName varchar(30), itemDescrip varchar(200), itemPrice double)";
+	private static final String CREATE_TRANSACTION_TABLE = "create table shop_transaction(transId Integer auto_increment primary key, transDescrip varchar(100), transTime varchar(30), foreign key(userId) references shop_user(userId), foreign key(itemId) references shop_item(itemId))";
 
 	private static final String URL = "jdbc:mysql://localhost:3306/test";
 	private static final String USERNAME = "root";
